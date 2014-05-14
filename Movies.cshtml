@@ -2,9 +2,6 @@
     var db = Database.Open("WebPagesMovies");
     var selectCommand = "SELECT * FROM Movies";
     var searchTerm = "";
-    var searchGenre = "";
-    var searchTitle = "";
-    var searchType = true;
 
     if(!Request.QueryString["searchGenre"].IsEmpty()) {
         selectCommand = "SELECT * FROM Movies WHERE Genre = @0";
@@ -75,7 +72,6 @@
                     grid.Column("Title"),
                     grid.Column("Genre"),
                     grid.Column("Year")
-            
                 )
    
             )
