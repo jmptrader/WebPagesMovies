@@ -64,11 +64,13 @@
             </div>
         </form>
         <div>
+            <!--using named parameter when calling the grid.GetHTML method -->
             @grid.GetHtml(
                 tableStyle: "grid",
                 headerStyle: "head",
                 alternatingRowStyle: "alt",
                 columns: grid.Columns(
+                    grid.Column(format: @<a href="~/EditMovie?id=@item.ID">Edit</a>),
                     grid.Column("Title"),
                     grid.Column("Genre"),
                     grid.Column("Year")
