@@ -24,6 +24,19 @@
             Validation.AddFormError("No movie was found for that ID");
         }
     }
+
+    if(IsPost && !Request["buttonDelete"].IsEmpty()){
+        movieId = Request.Form["movieId"];
+        if(!Request.Form["movieId"].IsEmpty()){
+            var db = Database.Open("WebPagesMovies");
+            var deleteCommand = "DELETE FROM Movies WHERE ID = @0";
+            db.Execute(deleteCommand, movieId);
+            Response.Redirect("~/Movies");
+    } else {
+        Validation.AddFormError("Movie ID is empty");
+    }
+
+    } 
 }
 
 <!DOCTYPE html>
@@ -51,7 +64,6 @@
                     <span>Genre:</span>
                     <span>@genre</span>
                 </p>
-
                 <p>
                     <span>Year:</span>
                     <span>@year</span>
@@ -59,7 +71,7 @@
 
                 <input type="hidden" name="movieid" value="@movieId" />
                 <p>
-                    <input type="submit" name="buttonDelete" value="Delete Movie" /></p>
+                    <input type="submit" name="buttonDelete" value="Delete Movie" />
                 </p>
             </fieldset>
         </form>
